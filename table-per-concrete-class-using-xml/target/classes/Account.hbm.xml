@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+ <hibernate-mapping>
+ 	<class name="com.Biditvats.domain.Account" table="ACCOUNT_MASTER5">
+		<id name="accNo" column="ACC_NUMBER">
+			<generator class="increment" />
+		</id>
+		
+		<property name="balance" column="BALANCE" />
+		<property name="customerId" column="CUSTOMER_ID" />
+		
+		<union-subclass name="com.Biditvats.domain.SavingAccount" table="SAVING_ACCOUNT_MASTER5" >
+			<property name="interestRate" column="INTEREST_RATE" />
+		</union-subclass>
+		
+		<union-subclass name="com.Biditvats.domain.CurrentAccount" table="CURRENT_ACCOUNT_MASTER5" >
+			<property name="mab" column="MAB" />
+			<property name="maxTxn" column="MAX_TXN" />
+		</union-subclass>
+		
+		<union-subclass name="com.Biditvats.domain.LoanAccount" table="LOAN_ACCOUNT_MASTER5" >
+			<property name="interestRate" column="INTEREST_RATE" />
+			<property name="emi" column="EMI" />
+			<property name="outStdAmount" column="OUT_STD_AMOUNT" />
+		</union-subclass>
+		
+	</class>
+ 
+ </hibernate-mapping>

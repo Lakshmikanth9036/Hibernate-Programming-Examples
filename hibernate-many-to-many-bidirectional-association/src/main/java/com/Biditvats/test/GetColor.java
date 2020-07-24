@@ -1,0 +1,25 @@
+package com.Biditvats.test;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.Biditvats.domain.Color;
+
+
+public class GetColor {
+
+	public static void main(String[] args) {
+		Configuration configuration = new Configuration().configure();
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+		
+		Session session = sessionFactory.openSession();
+		Color color = session.get(Color.class, 1L);
+		System.out.println(color);
+		System.out.println(color.getProducts());
+		
+		
+
+	}
+
+}

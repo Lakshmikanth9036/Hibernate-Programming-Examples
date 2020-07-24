@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+ <hibernate-mapping>
+ 	<class name="com.biditvats.domain.Account" table ="ACCOUNT_MASTER3">
+ 		<id name="accNo" column="ACC_NUMBER">
+ 			<generator class="identity" />
+ 		</id>
+ 	
+ 	<discriminator column="ACC_TYPE" type="string" />
+		
+		<property name="balance" column="BALANCE" />
+		<property name="customerId" column="CUSTOMER_ID" />
+		
+		<subclass name="com.biditvats.domain.SavingAccount" 
+				  discriminator-value="SA">
+			<property name="interestRate" column="INTEREST_RATE" />
+		</subclass>
+		
+		<subclass name="com.biditvats.domain.CurrentAccount"
+				  discriminator-value="CA">
+			<property name="mab" column="MAB" />
+			<property name="maxTxn" column="MAX_TX" />		  
+		</subclass>
+		
+		<subclass name="com.biditvats.domain.LoanAccount"
+		          discriminator-value="LA">
+			<property name="interestRate" column="INTEREST_RATE" />
+			<property name="emi" column="EMI" />
+			<property name="outStdAmount" column="OUT_STD_AMOUNT" />
+		</subclass>
+ 	
+ 	</class>
+ 
+ </hibernate-mapping>
